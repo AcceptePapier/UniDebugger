@@ -260,6 +260,7 @@ class Pipeline():
         cnt = work_num + len(self.records["failed"]) 
         
         for bug_name in sorted(list(root_casues.keys())):
+            if limit > 0 and cnt >= limit: return work_num, plau_num
             if bug_name in self.records["failed"] + self.records["worked"]: continue
             logging.info(f"Running on {cnt+1}-th bug {bug_name} @{self.hash_id}")
             
@@ -301,7 +302,7 @@ class Pipeline():
 
             plau_num += plausible; work_num += (patch is not None)
             cnt += 1
-            if limit > 0 and cnt >= limit: return work_num, plau_num
+            
         return work_num, plau_num
 
 if __name__ == "__main__": 
