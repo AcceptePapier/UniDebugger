@@ -73,7 +73,7 @@ class Pipeline():
             logging.info(f"Generating the {c+1}-th patch")
             fix_response = self.framework["fixer"].run(info, fix_pre_resp)
             try:
-                if patching_and_testing(patch=fix_response["aim"], project_meta=info["project_meta"]): #fixer生成了正确的patch
+                if patching_and_testing(patch=fix_response["aim"], project_meta=info["project_meta"]):
                     self.save(role="fixer", response_dict=fix_response, bug_name=info['project_meta']['bug_name'])
                     return True, fix_response["aim"]
             except Exception as e:
